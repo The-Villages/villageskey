@@ -190,18 +190,18 @@
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         keyData = await response.json();
         const areas = [...new Set(keyData.map(k => k.Area))];
-        populateDropdown('area', areas);
+        populateDropdown('area', areas, 'Select area');
       } catch (error) {
         console.error('Error fetching Airtable data:', error);
         alert('Could not fetch key data. Please try again later.');
       }
     }
 
-    function populateDropdown(id, items) {
+    function populateDropdown(id, items, placeholderText = 'Choose') {
       const el = document.getElementById(id);
       el.innerHTML = '';
       const placeholder = document.createElement('option');
-      placeholder.textContent = 'Choose';
+      placeholder.textContent = placeholderText;
       placeholder.disabled = true;
       placeholder.selected = true;
       placeholder.hidden = true;
